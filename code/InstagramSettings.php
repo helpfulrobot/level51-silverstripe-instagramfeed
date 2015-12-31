@@ -8,7 +8,8 @@ class InstagramSettings extends DataExtension
         'InstagramUserID' => 'Int'
     );
 
-    public function updateCMSFields(FieldList $fields) {
+    public function updateCMSFields(FieldList $fields)
+    {
         $fields->addFieldsToTab('Root.Instagram', array(
             TextField::create('InstagramClientID', _t('InstagramSettings.INSTAGRAM_CLIENT_ID', 'Instagram client id'))
                 ->setDescription(_t('InstagramSettings.INSTAGRAM_CLIENT_ID_DESC', "Register your client here: https://instagram.com/developer/register/")),
@@ -20,9 +21,9 @@ class InstagramSettings extends DataExtension
         ));
     }
 
-    public function updateCMSActions(FieldList $actions) {
+    public function updateCMSActions(FieldList $actions)
+    {
         Requirements::javascript('instagramfeed/javascript/InstagramSettings.js');
         $actions->push(FormAction::create('getUserID', _t('InstagramSettings.INSTAGRAM_GET_USER_ID', 'Get Instagram User ID')));
     }
-
 }

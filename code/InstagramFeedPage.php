@@ -1,6 +1,7 @@
 <?php
 
-class InstagramFeedPage extends Page {
+class InstagramFeedPage extends Page
+{
 
     private static $singular_name = 'Instagram Feed';
     private static $description = 'Basic page for an instagram feed.';
@@ -9,14 +10,16 @@ class InstagramFeedPage extends Page {
         'PostsLimit' => 'Int'
     );
 
-    public function getCMSFields(){
+    public function getCMSFields()
+    {
         $fields = parent::getCMSFields();
         $fields->addFieldToTab('Root.Main',
             NumericField::create('PostsLimit', _t('InstagramFeed.POSTS_LIMIT', 'Post Limit')));
         return $fields;
     }
 
-    public function getPosts(){
+    public function getPosts()
+    {
         // Get a instance of the factory
         $f = Injector::inst()->get('InstagramFactory');
 
@@ -28,7 +31,8 @@ class InstagramFeedPage extends Page {
     }
 
     // Get the caption without the hashtags and optional limited by $limit letters
-    public function stripCaption($caption, $limit = null){
+    public function stripCaption($caption, $limit = null)
+    {
 
         // Remove the hash tags
         $caption = substr($caption, 0, strpos($caption, '#'));
@@ -38,17 +42,20 @@ class InstagramFeedPage extends Page {
         $sf->setValue($caption);
 
         // Optional: limit the characters
-        if ($limit != null)
+        if ($limit != null) {
             return $sf->LimitCharacters($limit, '...');
+        }
 
         return $sf;
     }
 
     // Get the date from given timestamp, formatted with strftime
-    public function getDate($timestamp, $format = "%Y/%m/%d, %H:%M") {
+    public function getDate($timestamp, $format = "%Y/%m/%d, %H:%M")
+    {
         return strftime($format, $timestamp);
     }
-
 }
 
-class InstagramFeedPage_Controller extends Page_Controller {}
+class InstagramFeedPage_Controller extends Page_Controller
+{
+}
